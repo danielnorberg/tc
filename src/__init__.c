@@ -1,7 +1,7 @@
 #include "__init__.h"
 #include <tcadb.h>
 #include <tcbdb.h>
-#include <tcfdb.h>
+// #include <tcfdb.h>
 #include <tchdb.h>
 #include <tctdb.h>
 
@@ -59,12 +59,12 @@ PyMODINIT_FUNC  PyInit__tc(void)
   #endif
   if (tc_module == NULL)
     goto exit;
-  
+
   /* Create exceptions */
   tc_Error = PyErr_NewException("tc.Error", NULL, NULL);
   if ( (tc_Error == NULL) || (PyModule_AddObject(tc_module, "Error", tc_Error) == -1) )
     goto exit;
-  
+
   /* Register types */
   #define R(name, okstmt) \
     if (name(tc_module) okstmt) { \
@@ -147,18 +147,18 @@ PyMODINIT_FUNC  PyInit__tc(void)
   ADD_INT(tc_module, BDBCPBEFORE);
   ADD_INT(tc_module, BDBCPAFTER);
   /* end of BDB */
-  
+
   /* TDB: additional flags */
   ADD_INT(tc_module, TDBFOPEN);     /* whether opened */
   ADD_INT(tc_module, TDBFFATAL);    /* whetehr with fatal error */
-  
+
   /* TDB: tuning options */
   ADD_INT(tc_module, TDBTLARGE);    /* use 64-bit bucket array */
   ADD_INT(tc_module, TDBTDEFLATE);  /* compress each page with Deflate */
   ADD_INT(tc_module, TDBTBZIP);     /* compress each record with BZIP2 */
   ADD_INT(tc_module, TDBTTCBS);     /* compress each page with TCBS */
   ADD_INT(tc_module, TDBTEXCODEC);  /* compress each record with outer functions */
-  
+
   /* TDB: open modes */
   ADD_INT(tc_module, TDBOREADER);   /* open as a reader */
   ADD_INT(tc_module, TDBOWRITER);   /* open as a writer */
@@ -167,14 +167,14 @@ PyMODINIT_FUNC  PyInit__tc(void)
   ADD_INT(tc_module, TDBONOLCK);    /* open without locking */
   ADD_INT(tc_module, TDBOLCKNB);    /* lock without blocking */
   ADD_INT(tc_module, TDBOTSYNC);    /* synchronize every transaction */
-  
+
   /* TDB: index types */
   ADD_INT(tc_module, TDBITLEXICAL); /* lexical string */
   ADD_INT(tc_module, TDBITDECIMAL); /* decimal string */
   ADD_INT(tc_module, TDBITOPT);     /* optimize */
   ADD_INT(tc_module, TDBITVOID);    /* void */
   ADD_INT(tc_module, TDBITKEEP);    /* keep existing index */
-  
+
   /* TDB: query conditions */
   ADD_INT(tc_module, TDBQCSTREQ);   /* string is equal to */
   ADD_INT(tc_module, TDBQCSTRINC);  /* string is included in */
@@ -193,18 +193,18 @@ PyMODINIT_FUNC  PyInit__tc(void)
   ADD_INT(tc_module, TDBQCNUMOREQ); /* number is equal to at least one token in */
   ADD_INT(tc_module, TDBQCNEGATE);  /* negation flag */
   ADD_INT(tc_module, TDBQCNOIDX);   /* no index flag */
-  
+
   /* TDB: order types */
   ADD_INT(tc_module, TDBQOSTRASC);  /* string ascending */
   ADD_INT(tc_module, TDBQOSTRDESC); /* string descending */
   ADD_INT(tc_module, TDBQONUMASC);  /* number ascending */
   ADD_INT(tc_module, TDBQONUMDESC); /* number descending */
-  
+
   /* TDB: post treatments */
   ADD_INT(tc_module, TDBQPPUT);     /* modify the record */
   ADD_INT(tc_module, TDBQPOUT);     /* remove the record */
   ADD_INT(tc_module, TDBQPSTOP);    /* stop the iteration */
-  
+
   #undef ADD_INT
   /* end adding constants */
 
@@ -215,7 +215,7 @@ exit:
     Py_XDECREF(tc_module);
     tc_module = NULL;
   }
-  
+
   #if (PY_VERSION_HEX < 0x03000000)
     return;
   #else
