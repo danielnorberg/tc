@@ -640,8 +640,8 @@ static PyMethodDef tc_BDB_methods[] = {
     NULL},
   {"addint", (PyCFunction)tc_BDB_addint, METH_VARARGS | METH_KEYWORDS,
     "Add an integer to a record in a B+ tree database object."},
-  {"adddouble", (PyCFunction)tc_BDB_adddouble, METH_VARARGS | METH_KEYWORDS,
-    "Add a real number to a record in a B+ tree database object."},
+  // {"adddouble", (PyCFunction)tc_BDB_adddouble, METH_VARARGS | METH_KEYWORDS,
+  //   "Add a real number to a record in a B+ tree database object."},
   {NULL, NULL, 0, NULL}
 };
 
