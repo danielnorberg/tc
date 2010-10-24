@@ -107,9 +107,9 @@ PyMODINIT_FUNC  PyInit__tc(void)
 
   ADD_INT(tc_module, HDBTLARGE);
   ADD_INT(tc_module, HDBTDEFLATE);
-  ADD_INT(tc_module, HDBTBZIP);
+  // ADD_INT(tc_module, HDBTBZIP);
   ADD_INT(tc_module, HDBTTCBS);
-  ADD_INT(tc_module, HDBTEXCODEC);
+  // ADD_INT(tc_module, HDBTEXCODEC);
 
   ADD_INT(tc_module, HDBOREADER);
   ADD_INT(tc_module, HDBOWRITER);
@@ -117,7 +117,7 @@ PyMODINIT_FUNC  PyInit__tc(void)
   ADD_INT(tc_module, HDBOTRUNC);
   ADD_INT(tc_module, HDBONOLCK);
   ADD_INT(tc_module, HDBOLCKNB);
-  ADD_INT(tc_module, HDBOTSYNC);
+  // ADD_INT(tc_module, HDBOTSYNC);
 
   /* BDB */
   ADD_INT(tc_module, BDBFOPEN);
@@ -125,9 +125,9 @@ PyMODINIT_FUNC  PyInit__tc(void)
 
   ADD_INT(tc_module, BDBTLARGE);
   ADD_INT(tc_module, BDBTDEFLATE);
-  ADD_INT(tc_module, BDBTBZIP);
+  // ADD_INT(tc_module, BDBTBZIP);
   ADD_INT(tc_module, BDBTTCBS);
-  ADD_INT(tc_module, BDBTEXCODEC);
+  // ADD_INT(tc_module, BDBTEXCODEC);
 
   ADD_INT(tc_module, BDBOREADER);
   ADD_INT(tc_module, BDBOWRITER);
@@ -135,7 +135,7 @@ PyMODINIT_FUNC  PyInit__tc(void)
   ADD_INT(tc_module, BDBOTRUNC);
   ADD_INT(tc_module, BDBONOLCK);
   ADD_INT(tc_module, BDBOLCKNB);
-  ADD_INT(tc_module, BDBOTSYNC);
+  // ADD_INT(tc_module, BDBOTSYNC);
 
   ADD_INT(tc_module, BDBCPCURRENT);
   ADD_INT(tc_module, BDBCPBEFORE);
