@@ -361,7 +361,7 @@ static PyObject *tc_BDB_curnew(tc_BDB *self) {
   log_trace("ENTER");
   tc_BDBCursor *cur;
   PyObject *args;
-  
+
   args = Py_BuildValue("(O)", self);
   cur = (tc_BDBCursor *)tc_BDBCursor_new(&tc_BDBCursorType, args, NULL);
   Py_DECREF(args);
@@ -552,7 +552,7 @@ TC_XDB_SetItem(tc_BDB_SetItem,tc_BDB,tcbdbput,bdb,tc_Error_SetBDB);
 TC_XDB_ass_sub(tc_BDB_ass_sub,tc_BDB,tc_BDB_SetItem,tc_BDB_DelItem);
 
 TC_XDB_addint(tc_BDB_addint,tc_BDB,addint,tcbdbaddint,bdb,tc_Error_SetBDB);
-TC_XDB_adddouble(tc_BDB_adddouble,tc_BDB,addint,tcbdbadddouble,bdb,tc_Error_SetBDB);
+// TC_XDB_adddouble(tc_BDB_adddouble,tc_BDB,addint,tcbdbadddouble,bdb,tc_Error_SetBDB);
 
 static PyMethodDef tc_BDB_methods[] = {
   {"errmsg", (PyCFunction)tc_BDB_errmsg, METH_VARARGS | METH_KEYWORDS | METH_CLASS,
