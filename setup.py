@@ -23,9 +23,7 @@ sources = [
   'src/util.c',
   'src/HDB.c',
   'src/BDB.c',
-  'src/BDBCursor.c',
-  'src/TDB.c',
-  'src/TDBQuery.c'
+  'src/BDBCursor.c'
 ]
 
 # -----------------------------------------------------------------------------
@@ -69,7 +67,7 @@ def rm_dir(path):
 from distutils.command.build_ext import build_ext as _build_ext
 class build_ext(_build_ext):
   description = 'build the C extension (compile/link to build directory)'
-  
+
   def finalize_options(self):
     _build_ext.finalize_options(self)
     # Ports
@@ -92,27 +90,27 @@ class build_ext(_build_ext):
     # Update distribution
     self.distribution.include_dirs = self.include_dirs
     self.distribution.library_dirs = self.library_dirs
-  
+
   def run(self):
     self._run_config_if_needed()
     self._configure_compiler()
     log.debug('include dirs: %r', self.include_dirs)
     log.debug('library dirs: %r', self.library_dirs)
     _build_ext.run(self)
-  
+
   def _configure_compiler(self):
     machine = platform.machine()
     cflags = ''
-    
+
     log.debug("configuring compiler...")
-    
+
     #cflags += ' -include "%s"' % os.path.realpath(os.path.join(
     #  os.path.dirname(__file__), "src", "prefix.h"))
-    
+
     # Warning flags
     warnings = ['all', 'no-unknown-pragmas']
     cflags += ''.join([' -W%s' % w for w in warnings])
-    
+
     if '--debug' in sys.argv:
       log.debug("build mode: debug -- setting appropriate cflags and macros")
       self.debug = True
@@ -131,7 +129,7 @@ class build_ext(_build_ext):
       os.environ['CFLAGS'] += cflags
     else:
       os.environ['CFLAGS'] = cflags
-  
+
   def _run_config_if_needed(self):
     try:
       # If system_config.h is newer than this file and exists: don't create it again.
@@ -140,18 +138,18 @@ class build_ext(_build_ext):
     except os.error:
       pass
     self.run_command('config')
-  
+
 
 from distutils.command.config import config as _config
 class config(_config):
   description = 'configure build (automatically runned by build commands)'
-  
+
   def initialize_options (self):
     _config.initialize_options(self)
     self.noisy = 0
     self.dump_source = 0
     self.macros = {}
-  
+
   def finalize_options(self):
     _config.finalize_options(self)
     for path in self.distribution.library_dirs:
@@ -160,18 +158,18 @@ class config(_config):
     for path in self.distribution.include_dirs:
       if path not in self.include_dirs:
         self.include_dirs.append(path)
-  
+
   def run(self):
     self._libraries()
     self._write_system_config_h()
-  
+
   def _silence(self):
     self.orig_log_threshold = log._global_log.threshold
     log._global_log.threshold = log.WARN
-  
+
   def _unsilence(self):
     log._global_log.threshold = self.orig_log_threshold
-  
+
   def _libraries(self):
     global libraries
     for n in libraries:
@@ -183,7 +181,7 @@ class config(_config):
       if not ok:
         log.error("missing required library %s" % n[0])
         sys.exit(1)
-  
+
   def _write_system_config_h(self):
     import re
     f = open(system_config_h, "w")
@@ -203,13 +201,13 @@ class config(_config):
     except:
       os.remove(system_config_h)
       raise
-  
-  def check_lib (self, library, library_dirs=None, headers=None, include_dirs=None, 
+
+  def check_lib (self, library, library_dirs=None, headers=None, include_dirs=None,
                  other_libraries=[]):
     self._check_compiler()
-    return self.try_link("int main (void) { return 0; }", headers, include_dirs, 
+    return self.try_link("int main (void) { return 0; }", headers, include_dirs,
     [library]+other_libraries, library_dirs)
-  
+
 
 class sphinx_build(Command):
   description = 'build documentation using Sphinx'
@@ -226,7 +224,7 @@ class sphinx_build(Command):
     ('pdb', 'P', 'run Pdb on exception'),
   ]
   boolean_options = ['all', 'reload-env', 'no-color', 'pdb']
-  
+
   def initialize_options(self):
     self.sphinx_args = []
     self.builder = None
@@ -239,14 +237,14 @@ class sphinx_build(Command):
     self.set = None
     self.no_color = False
     self.pdb = False
-  
+
   def finalize_options(self):
     self.sphinx_args.append('sphinx-build')
-    
+
     if self.builder is None:
       self.builder = 'html'
     self.sphinx_args.extend(['-b', self.builder])
-    
+
     if self.all:
       self.sphinx_args.append('-a')
     if self.reload_env:
@@ -257,21 +255,21 @@ class sphinx_build(Command):
       self.sphinx_args.append('-q')
     if self.pdb:
       self.sphinx_args.append('-P')
-    
+
     if self.cache_dir is not None:
       self.sphinx_args.extend(['-d', self.cache_dir])
     if self.conf_dir is not None:
       self.sphinx_args.extend(['-c', self.conf_dir])
     if self.set is not None:
       self.sphinx_args.extend(['-D', self.set])
-    
+
     if self.source_dir is None:
       self.source_dir = os.path.join('docs', 'source')
     if self.out_dir is None:
       self.out_dir = os.path.join('docs', self.builder)
-    
+
     self.sphinx_args.extend([self.source_dir, self.out_dir])
-  
+
   def run(self):
     try:
       import sphinx
@@ -288,7 +286,7 @@ class sphinx_build(Command):
         sphinx.main(self.sphinx_args)
     except ImportError:
       log.info('Sphinx not installed -- skipping documentation. (%s)', sys.exc_info()[1])
-  
+
 
 from distutils.command.clean import clean as _clean
 class clean(_clean):
@@ -302,7 +300,7 @@ class clean(_clean):
     rm_dir('docs/latex')
     rm_dir('docs/pdf')
     rm_dir('docs/text')
-  
+
 
 from distutils.command.sdist import sdist as _sdist
 class sdist(_sdist):
@@ -312,7 +310,7 @@ class sdist(_sdist):
     finally:
       for path in ['MANIFEST']:
         rm_file(path)
-  
+
 
 # -----------------------------------------------------------------------------
 # Distribution
@@ -333,7 +331,7 @@ class TCDistribution(Distribution):
     #  self.cmdclass['debian'] = debian
     #except IOError:
     #  pass
-  
+
 
 # -----------------------------------------------------------------------------
 # Main
