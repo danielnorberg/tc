@@ -81,7 +81,7 @@ static void tc_HDB_dealloc(tc_HDB *self) {
 
 /*
  * in-memory only databases:
- * We need to keep track of wherethere a database was created with a file 
+ * We need to keep track of wherethere a database was created with a file
  * backend or not. If no file is specified, we need to use tcmdbnew2() and co.
  * from tcutil.c instead of tchdbnew() and co..
  */
@@ -327,8 +327,8 @@ TC_XDB_DelItem(tc_HDB_DelItem,tc_HDB,tchdbout,hdb,tc_Error_SetHDB);
 TC_XDB_SetItem(tc_HDB_SetItem,tc_HDB,tchdbput,hdb,tc_Error_SetHDB);
 TC_XDB_ass_sub(tc_HDB_ass_sub,tc_HDB,tc_HDB_SetItem,tc_HDB_DelItem);
 
-TC_XDB_addint(tc_HDB_addint,tc_HDB,addint,tchdbaddint,hdb,tc_Error_SetHDB);
-TC_XDB_adddouble(tc_HDB_adddouble,tc_HDB,addint,tchdbadddouble,hdb,tc_Error_SetHDB);
+// TC_XDB_addint(tc_HDB_addint,tc_HDB,addint,tchdbaddint,hdb,tc_Error_SetHDB);
+// TC_XDB_adddouble(tc_HDB_adddouble,tc_HDB,addint,tchdbadddouble,hdb,tc_Error_SetHDB);
 
 /* methods of classes */
 static PyMethodDef tc_HDB_methods[] = {
@@ -394,10 +394,10 @@ static PyMethodDef tc_HDB_methods[] = {
     NULL},
   {"itervalues", (PyCFunction)tc_HDB_GetIter_values, METH_NOARGS,
     NULL},
-  {"addint", (PyCFunction)tc_HDB_addint, METH_VARARGS | METH_KEYWORDS,
-    "Add an integer to a record in a hash database object."},
-  {"adddouble", (PyCFunction)tc_HDB_adddouble, METH_VARARGS | METH_KEYWORDS,
-    "Add a real number to a record in a hash database object."},
+  // {"addint", (PyCFunction)tc_HDB_addint, METH_VARARGS | METH_KEYWORDS,
+  //   "Add an integer to a record in a hash database object."},
+  // {"adddouble", (PyCFunction)tc_HDB_adddouble, METH_VARARGS | METH_KEYWORDS,
+  //   "Add a real number to a record in a hash database object."},
   {NULL, NULL, 0, NULL}
 };
 
