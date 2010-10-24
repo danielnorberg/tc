@@ -551,7 +551,7 @@ TC_XDB_DelItem(tc_BDB_DelItem,tc_BDB,tcbdbout,bdb,tc_Error_SetBDB);
 TC_XDB_SetItem(tc_BDB_SetItem,tc_BDB,tcbdbput,bdb,tc_Error_SetBDB);
 TC_XDB_ass_sub(tc_BDB_ass_sub,tc_BDB,tc_BDB_SetItem,tc_BDB_DelItem);
 
-TC_XDB_addint(tc_BDB_addint,tc_BDB,addint,tcbdbaddint,bdb,tc_Error_SetBDB);
+// TC_XDB_addint(tc_BDB_addint,tc_BDB,addint,tcbdbaddint,bdb,tc_Error_SetBDB);
 // TC_XDB_adddouble(tc_BDB_adddouble,tc_BDB,addint,tcbdbadddouble,bdb,tc_Error_SetBDB);
 
 static PyMethodDef tc_BDB_methods[] = {
@@ -638,8 +638,8 @@ static PyMethodDef tc_BDB_methods[] = {
     NULL},
   {"itervalues", (PyCFunction)tc_BDB_GetIter_values, METH_NOARGS,
     NULL},
-  {"addint", (PyCFunction)tc_BDB_addint, METH_VARARGS | METH_KEYWORDS,
-    "Add an integer to a record in a B+ tree database object."},
+  // {"addint", (PyCFunction)tc_BDB_addint, METH_VARARGS | METH_KEYWORDS,
+  //   "Add an integer to a record in a B+ tree database object."},
   // {"adddouble", (PyCFunction)tc_BDB_adddouble, METH_VARARGS | METH_KEYWORDS,
   //   "Add a real number to a record in a B+ tree database object."},
   {NULL, NULL, 0, NULL}
